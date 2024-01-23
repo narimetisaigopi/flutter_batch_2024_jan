@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/row_column_stack_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/login_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: HomeScreen(),
-      home: LoginScreen(),
+      home: RowColumnStackScreen(),
     );
   }
 }
