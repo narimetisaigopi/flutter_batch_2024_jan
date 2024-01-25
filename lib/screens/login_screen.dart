@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -62,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 child: Text(
                   "InkWell -- 2",
-                  style: TextStyle(fontSize: 30),
+                  style: GoogleFonts.inter(fontSize: 12).copyWith(fontSize: 30),
                 )),
             GestureDetector(
                 onTap: () {
@@ -70,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 child: Text(
                   "GestureDetector",
-                  style: TextStyle(fontSize: 30),
+                  style: TextStyle(fontSize: 30, fontFamily: "SingleDay"),
                 )),
             ElevatedButton(
                 onPressed: () {

@@ -3,6 +3,7 @@ import 'package:flutter_batch_2024_jan/row_column_stack_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/images_gallery.dart';
 import 'package:flutter_batch_2024_jan/screens/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   // start the program
@@ -17,11 +18,13 @@ class MyApp extends StatelessWidget {
       // it is parent for whole app
       title: 'App Name',
       theme: ThemeData(
+        textTheme: GoogleFonts.aDLaMDisplayTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
+        // fontFamily: 'SingleDay'
       ),
       // home: HomeScreen(),
-      home: ImagesGalleryScreen(),
+      home: LoginScreen(),
     );
   }
 }
