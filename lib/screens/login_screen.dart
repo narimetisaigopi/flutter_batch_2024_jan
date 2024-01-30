@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/screens/dashboard_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/registration_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  TextEditingController phoneTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        title: Text("Login"),
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -73,29 +81,19 @@ class LoginScreen extends StatelessWidget {
                   "GestureDetector",
                   style: TextStyle(fontSize: 30, fontFamily: "SingleDay"),
                 )),
-            ElevatedButton(
-                onPressed: () {
-                  print("Clicked on Registration");
-                },
-                style: ButtonStyle(
-                    // padding: MaterialStateProperty.all(EdgeInsets.zero),
-                    padding: MaterialStateProperty.all(EdgeInsets.all(8)),
-                    backgroundColor: MaterialStateProperty.all(Colors.yellow)),
-                child: const Text(
-                  "Registration",
-                  style: TextStyle(color: Colors.black),
-                )),
+
             const Align(
                 alignment: Alignment.topLeft,
                 child: Text("Enter Phone Number")),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
-                keyboardType: TextInputType.emailAddress,
+                controller: phoneTextEditingController,
+                keyboardType: TextInputType.phone,
                 maxLength: 10,
                 obscureText: false,
                 enabled: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintStyle: TextStyle(color: Colors.black),
                     hintText: "Enter Phone Number",
                     labelText: "Phone Number",
@@ -112,23 +110,51 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(12)))),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                minLines: 3,
-                maxLines: 5,
-                decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.black),
-                    hintText: "Enter Bio Data",
-                    labelText: "Bio Data",
-                    counterStyle: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    // counterText: "", if you dont want show count below inputfield
-                    border: OutlineInputBorder()),
-              ),
-            ),
+            ElevatedButton(
+                onPressed: () {
+                  print("Clicked on Registration");
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (ctx) => DashboardScreen(
+                                email: phoneTextEditingController.text,
+                              )),
+                      (route) => false);
+                },
+                style: ButtonStyle(
+                    // padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    padding: MaterialStateProperty.all(EdgeInsets.all(8)),
+                    backgroundColor: MaterialStateProperty.all(Colors.yellow)),
+                child: const Text(
+                  "Login",
+                  style: TextStyle(color: Colors.black),
+                )),
+
+            TextButton(
+                onPressed: () {
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (ctx) => RegistrationScreen()));
+
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (ctx) => RegistrationScreen()));
+                },
+                child: Text("Don't you have account?"))
+            // const Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: TextField(
+            //     minLines: 3,
+            //     maxLines: 5,
+            //     decoration: InputDecoration(
+            //         hintStyle: TextStyle(color: Colors.black),
+            //         hintText: "Enter Bio Data",
+            //         labelText: "Bio Data",
+            //         counterStyle: TextStyle(
+            //           color: Colors.green,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //         // counterText: "", if you dont want show count below inputfield
+            //         border: OutlineInputBorder()),
+            //   ),
+            // ),
           ],
         ),
       ),

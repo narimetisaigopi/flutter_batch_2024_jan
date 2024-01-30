@@ -5,6 +5,7 @@ import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/images_gallery.dart';
 import 'package:flutter_batch_2024_jan/screens/login_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/registration_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // fontFamily: 'SingleDay'
       ),
       // home: HomeScreen(),
-      home: RegistrationScreen(),
+      home: SplashScreen(),
     );
   }
 }

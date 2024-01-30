@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/screens/dashboard_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,7 +16,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     height: 16,
   );
 
-  bool visiablePassword = false;
+  bool visiablePassword = true;
   XFile? pickedXFile;
 
   var formKey = GlobalKey<FormState>();
@@ -28,7 +29,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   void initState() {
     print("initState called");
     // calls only once
-    nameTextEditingController.text = "AppName";
+    // nameTextEditingController.text = "AppName";
 
     // api data fetching, runtime permission, locations, etc
     super.initState();
@@ -128,6 +129,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   }
                   return null;
                 },
+                textInputAction: TextInputAction.next,
+                onEditingComplete: () {
+                  print("Moving to next line");
+                  FocusScope.of(context).nextFocus();
+                },
                 decoration: const InputDecoration(
                     hintText: "Enter name",
                     label: Text("Name"),
@@ -140,6 +146,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 controller: emailTextEditingController,
                 maxLength: 100,
                 keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                onEditingComplete: () {
+                  print("Moving to next line");
+                  FocusScope.of(context).nextFocus();
+                },
                 validator: (value) {
                   final bool emailValid = RegExp(
                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -165,6 +176,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 maxLength: 100,
                 obscureText: visiablePassword,
                 keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () {
+                  print("Moving to next line");
+                  FocusScope.of(context).unfocus();
+                },
+                onFieldSubmitted: (value) {
+                  validate();
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty || value.length < 8) {
                     return 'Password should be atleast 8 characters';
@@ -191,8 +210,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               textFieldDefaultGap,
               ElevatedButton(
                   onPressed: () {
-                    print(nameTextEditingController.text);
+                    FocusScope.of(context).unfocus();
+
+                    // Navigator.of(context).push(route);
+                    // Navigator.of(context).pushAndRemoveUntil(route);
+                    // Navigator.of(context).pushReplacement(route);
+
+                    // Navigator.of(context).push(
+                    //     MaterialPageRoute(builder: (ctx) => DashboardScreen()));
+
+                    // validation with texteditingcontroller
                     validate();
+                    // validation with form widget
                     // if (pickedXFile == null) {
                     //   print("Please select Image");
                     //   Fluttertoast.showToast(msg: "Please select Image");
@@ -200,6 +229,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     //   print("Processing your request");
                     //   Fluttertoast.showToast(
                     //       msg: "Accont Created successfully");
+                    //   Navigator.of(context).pushAndRemoveUntil(
+                    //       MaterialPageRoute(
+                    //           builder: (ctx) => DashboardScreen()),
+                    //       (route) => false);
                     // } else {
                     //   print("Something went wrong");
                     // }
@@ -216,7 +249,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     style: TextStyle(color: Colors.red),
                   )),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: const Text(
                     "Already have account?",
                     style: TextStyle(color: Colors.blue),
@@ -242,6 +277,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       Fluttertoast.showToast(msg: "Enter valid password");
     } else {
       Fluttertoast.showToast(msg: "Success");
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (ctx) => DashboardScreen(
+                    email: email,
+                    name: name,
+                  )),
+          (route) => false);
     }
   }
 
