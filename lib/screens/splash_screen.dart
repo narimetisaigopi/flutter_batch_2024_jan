@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/screens/dashboard_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,8 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
     print("Timer started");
     Timer(Duration(seconds: 2), () {
       print("Timer completed");
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (ctx) => LoginScreen()), (route) => false);
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (builder) => LoginScreen()));
+      // Navigator.pushNamed(context, "routeName", arguments: []);
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (ctx) => LoginScreen()), (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          DashboardScreen.routeName, (route) => false,
+          arguments: [""]);
     });
     super.initState();
   }

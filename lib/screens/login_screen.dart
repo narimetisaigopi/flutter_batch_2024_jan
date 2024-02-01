@@ -113,12 +113,15 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   print("Clicked on Registration");
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (ctx) => DashboardScreen(
-                                email: phoneTextEditingController.text,
-                              )),
-                      (route) => false);
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //     MaterialPageRoute(
+                  //         builder: (ctx) => DashboardScreen(
+                  //               email: phoneTextEditingController.text,
+                  //             )),
+                  //     (route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      DashboardScreen.routeName, (route) => false,
+                      arguments: [phoneTextEditingController.text, "Sai"]);
                 },
                 style: ButtonStyle(
                     // padding: MaterialStateProperty.all(EdgeInsets.zero),

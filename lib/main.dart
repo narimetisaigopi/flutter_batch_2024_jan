@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/navigations/app_routes.dart';
 import 'package:flutter_batch_2024_jan/row_column_stack_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
@@ -20,14 +21,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // it is parent for whole app
       title: 'App Name',
+        debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        
         textTheme: GoogleFonts.aDLaMDisplayTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
         // fontFamily: 'SingleDay'
       ),
-      // home: HomeScreen(),
-      home: SplashScreen(),
+        initialRoute: '/',
+        // routes: {
+        //   '/': (context) => RegistrationScreen(),
+        //   '/loginScreen': (context) => LoginScreen()
+        // },
+        onGenerateRoute: onGenerateRoute
+        // home: SplashScreen(),
     );
   }
 }
