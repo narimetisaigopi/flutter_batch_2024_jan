@@ -18,7 +18,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   List dashboardScreens = [
     DashHomeScreen(),
@@ -45,6 +45,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
           const Icon(
             Icons.search_outlined,
             color: Colors.white,
+          ),
+          InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  // isDismissible: false,
+                  // enableDrag: false,
+                  context: context,
+                  builder: (ctx) {
+                    return Container(
+                      height: 250,
+                      child: Column(
+                        children: [
+                          const Text("Filter Data"),
+                          const ListTile(
+                            leading: CircleAvatar(),
+                            title: Text("Filter By Name"),
+                          ),
+                          const ListTile(
+                            leading: CircleAvatar(),
+                            title: Text("Filter By Price"),
+                          ),
+                          const ListTile(
+                            leading: CircleAvatar(),
+                            title: Text("Filter By Age"),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Close"))
+                        ],
+                      ),
+                    );
+                  });
+            },
+            child: Icon(
+              Icons.filter_alt,
+              color: Colors.white,
+            ),
           ),
           IconButton(
               onPressed: () {

@@ -17,7 +17,7 @@ class DrawerItemWidget extends StatelessWidget {
               color: Colors.black,
             ),
             label: Text(title)),
-        Divider(),
+        const Divider(),
       ],
     );
   }
