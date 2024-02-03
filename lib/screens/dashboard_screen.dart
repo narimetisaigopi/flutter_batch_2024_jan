@@ -3,7 +3,10 @@ import 'package:flutter_batch_2024_jan/screens/dashboard/dashhome_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/subscription_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/videos_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/pageview_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/profile_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/tabview_layout.dart';
 import 'package:flutter_batch_2024_jan/widgets/drawer_item_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -24,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashHomeScreen(),
     VideosScreen(),
     SubscriptionScreen(),
-    SubscriptionScreen(),
+    ProfileScreen(),
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -87,10 +90,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           IconButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (ctx) => SplashScreen()),
-                    (route) => false);
+                showDialog(
+                    context: context,
+                    builder: (ctx) {
+                      return AlertDialog(
+                        title: Text("Logout"),
+                        content: Text("Do you really want to logout?"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("No")),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (ctx) => SplashScreen()),
+                                    (route) => false);
+                              },
+                              child: Text("Yes")),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Not so"))
+                        ],
+                      );
+                    });
               },
               icon: const Icon(
                 Icons.logout_outlined,
@@ -124,6 +153,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Navigator.pop(context);
               Navigator.push(context,
                   MaterialPageRoute(builder: (ctx) => DashHomeScreen()));
+            },
+          ),
+          DrawerItemWidget(
+            title: "Tab Layout",
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => TabViewLayout()));
+            },
+          ),
+          DrawerItemWidget(
+            title: "PageView Layout",
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => PageViewScreen()));
             },
           ),
           DrawerItemWidget(

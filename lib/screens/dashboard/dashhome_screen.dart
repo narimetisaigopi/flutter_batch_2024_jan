@@ -23,22 +23,25 @@ class DashHomeScreen extends StatelessWidget {
         //     return myContainer(index: index);
         //   },
         // )
-        body: ListView.separated(
-      itemCount: 99,
-      itemBuilder: (context, index) {
-        return myContainer(index: index);
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        // return Divider(
-        //   height: 10,
-        //   color: Colors.red,
-        // );
-        return Container(
-          color: index % 2 == 0 ? Colors.red : Colors.yellow,
-          height: 8,
-          width: double.infinity,
-        );
-      },
+        body: Scrollbar(
+        thickness: 10,
+      child: ListView.separated(
+        itemCount: 99,
+        itemBuilder: (context, index) {
+          return myContainer(index: index);
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          // return Divider(
+          //   height: 10,
+          //   color: Colors.red,
+          // );
+          return Container(
+            color: index % 2 == 0 ? Colors.red : Colors.yellow,
+            height: 8,
+            width: double.infinity,
+          );
+        },
+      ),
     ));
   }
 
