@@ -3,4 +3,8 @@ class Constants {
   static const double mediumDeviceFontSize = 16;
   static const double largeDeviceFontSize = 24;
   static const double webDeviceFontSize = 30;
+
+  // mobile,desktop
+  // mobile < 720
+  // desktop >= 720
 }

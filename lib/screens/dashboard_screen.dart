@@ -33,192 +33,195 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        // // custom drawer icon: ref: https://stackoverflow.com/questions/47435231/open-drawer-on-clicking-appbar
-        // leading: InkWell(
-        //     onTap: () {
-        //       _scaffoldKey.currentState!.openDrawer();
-        //     },
-        //     child: Icon(Icons.home)),
-        backgroundColor: Colors.teal,
-        title: const Text("Dashboard Screen"),
-        actions: [
-          const Icon(
-            Icons.search_outlined,
-            color: Colors.white,
-          ),
-          InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                  // isDismissible: false,
-                  // enableDrag: false,
-                  context: context,
-                  builder: (ctx) {
-                    return Container(
-                      height: 250,
-                      child: Column(
-                        children: [
-                          const Text("Filter Data"),
-                          const ListTile(
-                            leading: CircleAvatar(),
-                            title: Text("Filter By Name"),
-                          ),
-                          const ListTile(
-                            leading: CircleAvatar(),
-                            title: Text("Filter By Price"),
-                          ),
-                          const ListTile(
-                            leading: CircleAvatar(),
-                            title: Text("Filter By Age"),
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("Close"))
-                        ],
-                      ),
-                    );
-                  });
-            },
-            child: Icon(
-              Icons.filter_alt,
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          // // custom drawer icon: ref: https://stackoverflow.com/questions/47435231/open-drawer-on-clicking-appbar
+          // leading: InkWell(
+          //     onTap: () {
+          //       _scaffoldKey.currentState!.openDrawer();
+          //     },
+          //     child: Icon(Icons.home)),
+          backgroundColor: Colors.teal,
+          title: const Text("Dashboard Screen"),
+          actions: [
+            const Icon(
+              Icons.search_outlined,
               color: Colors.white,
             ),
-          ),
-          IconButton(
-              onPressed: () {
-                showDialog(
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    // isDismissible: false,
+                    // enableDrag: false,
                     context: context,
                     builder: (ctx) {
-                      return AlertDialog(
-                        title: Text("Logout"),
-                        content: Text("Do you really want to logout?"),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("No")),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (ctx) => SplashScreen()),
-                                    (route) => false);
-                              },
-                              child: Text("Yes")),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("Not so"))
-                        ],
+                      return Container(
+                        height: 250,
+                        child: Column(
+                          children: [
+                            const Text("Filter Data"),
+                            const ListTile(
+                              leading: CircleAvatar(),
+                              title: Text("Filter By Name"),
+                            ),
+                            const ListTile(
+                              leading: CircleAvatar(),
+                              title: Text("Filter By Price"),
+                            ),
+                            const ListTile(
+                              leading: CircleAvatar(),
+                              title: Text("Filter By Age"),
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Close"))
+                          ],
+                        ),
                       );
                     });
               },
-              icon: const Icon(
-                Icons.logout_outlined,
-                color: Colors.red,
-              ))
-        ],
-      ),
-      drawer: Drawer(
-        // width: 300,
-        backgroundColor: Colors.white,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            width: double.infinity,
-            child: DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 34,
-                    child: Text("F&D"),
-                  ),
-                  Text("Flutter & Dart"),
-                ],
+              child: Icon(
+                Icons.filter_alt,
+                color: Colors.white,
               ),
             ),
-          ),
-          DrawerItemWidget(
-            title: "Home",
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (ctx) => DashHomeScreen()));
-            },
-          ),
-          DrawerItemWidget(
-            title: "Tab Layout",
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (ctx) => TabViewLayout()));
-            },
-          ),
-          DrawerItemWidget(
-            title: "PageView Layout",
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (ctx) => PageViewScreen()));
-            },
-          ),
-          DrawerItemWidget(
-            title: "Logout",
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ]),
+            IconButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (ctx) {
+                        return AlertDialog(
+                          title: Text("Logout"),
+                          content: Text("Do you really want to logout?"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("No")),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) => SplashScreen()),
+                                      (route) => false);
+                                },
+                                child: Text("Yes")),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Not so"))
+                          ],
+                        );
+                      });
+                },
+                icon: const Icon(
+                  Icons.logout_outlined,
+                  color: Colors.red,
+                ))
+          ],
+        ),
+        drawer: Drawer(
+          // width: 300,
+          backgroundColor: Colors.white,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+              width: double.infinity,
+              child: DrawerHeader(
+                decoration: BoxDecoration(color: Colors.green),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      radius: 34,
+                      child: Text("F&D"),
+                    ),
+                    Text("Flutter & Dart"),
+                  ],
+                ),
+              ),
+            ),
+            DrawerItemWidget(
+              title: "Home",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => DashHomeScreen()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "Tab Layout",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => TabViewLayout()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "PageView Layout",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => PageViewScreen()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "Logout",
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ]),
+        ),
+        // endDrawer: Drawer(),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          type: BottomNavigationBarType.fixed,
+          onTap: (position) {
+            print("position ${position}");
+            currentIndex = position;
+            setState(() {});
+          },
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.black,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.play_circle_rounded), label: "Videos"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.subscriptions_sharp), label: "Subscptions"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          ],
+        ),
+        body: dashboardScreens[currentIndex],
+        // body: Column(children: [
+        //   Text("Logged in as ${widget.email}"),
+        //   // ElevatedButton(
+        //   //     onPressed: () {
+        //   //       Navigator.pop(context);
+        //   //     },
+        //   //     child: Text("Go Back"))
+        //   // ElevatedButton(
+        //   //     onPressed: () {
+        //   //       // Navigator.of(context).pushAndRemoveUntil(
+        //   //       //     MaterialPageRoute(builder: (ctx) => SplashScreen()),
+        //   //       //     (route) => false);
+        //   //       Navigator.pushAndRemoveUntil(
+        //   //           context,
+        //   //           MaterialPageRoute(builder: (ctx) => SplashScreen()),
+        //   //           (route) => false);
+        //   //     },
+        //   //     child: Text("Logout"))
+        // ]),
       ),
-      // endDrawer: Drawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (position) {
-          print("position ${position}");
-          currentIndex = position;
-          setState(() {});
-        },
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.play_circle_rounded), label: "Videos"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.subscriptions_sharp), label: "Subscptions"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
-      ),
-      body: dashboardScreens[currentIndex],
-      // body: Column(children: [
-      //   Text("Logged in as ${widget.email}"),
-      //   // ElevatedButton(
-      //   //     onPressed: () {
-      //   //       Navigator.pop(context);
-      //   //     },
-      //   //     child: Text("Go Back"))
-      //   // ElevatedButton(
-      //   //     onPressed: () {
-      //   //       // Navigator.of(context).pushAndRemoveUntil(
-      //   //       //     MaterialPageRoute(builder: (ctx) => SplashScreen()),
-      //   //       //     (route) => false);
-      //   //       Navigator.pushAndRemoveUntil(
-      //   //           context,
-      //   //           MaterialPageRoute(builder: (ctx) => SplashScreen()),
-      //   //           (route) => false);
-      //   //     },
-      //   //     child: Text("Logout"))
-      // ]),
     );
   }
 }
