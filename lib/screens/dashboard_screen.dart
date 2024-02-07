@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/screens/api/todo_api_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/change_langauge_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/dashhome_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/subscription_screen.dart';
@@ -183,6 +184,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (ctx) => TabViewLayout()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "TODO API",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => TodoAPIScreen()));
               },
             ),
             DrawerItemWidget(
