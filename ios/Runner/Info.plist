@@ -51,5 +51,12 @@
 	<string>For User accountion profile pic</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>For User accountion video recording</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>hi</string>
+		<string>te</string>
+		<string>ta</string>
+	</array>
 </dict>
 </plist>

@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^6.1.0
   image_picker: ^1.0.7
   fluttertoast: ^8.2.4
+  easy_localization: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,7 @@ flutter:
     - assets/images/
     - assets/videos/
     - assets/icons/
+    - assets/translations/
     # - assets/images/bg_image.jpg
     # - assets/images/aws_services.png
 

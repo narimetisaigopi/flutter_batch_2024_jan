@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/login_screen.dart';
@@ -27,6 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
           DashboardScreen.routeName, (route) => false,
           arguments: [""]);
     });
+    
+
     super.initState();
   }
 

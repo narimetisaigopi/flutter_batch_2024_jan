@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/screens/change_langauge_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/dashhome_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/subscription_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/videos_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/layout_builder_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/pageview_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/profile_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
@@ -21,15 +24,24 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int currentIndex = 1;
+  int currentIndex = 0;
 
   List dashboardScreens = [
-    DashHomeScreen(),
+    // DashHomeScreen(),
+    LayoutBuilderScreen(),
     VideosScreen(),
     SubscriptionScreen(),
     ProfileScreen(),
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.setLocale(Locale("hi"));
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +58,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           backgroundColor: Colors.teal,
           title: const Text("Dashboard Screen"),
           actions: [
-            const Icon(
-              Icons.search_outlined,
-              color: Colors.white,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => ChangeLanguageScreen()));
+              },
+              child: const Icon(
+                Icons.language,
+                color: Colors.white,
+              ),
             ),
             InkWell(
               onTap: () {
@@ -192,13 +212,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
           },
           unselectedItemColor: Colors.grey,
           selectedItemColor: Colors.black,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "home".tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.play_circle_rounded), label: "Videos"),
+                icon: Icon(Icons.play_circle_rounded), label: "videos".tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.subscriptions_sharp), label: "Subscptions"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+                icon: Icon(Icons.subscriptions_sharp),
+                label: "subscriptions".tr()),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person), label: "profile".tr()),
           ],
         ),
         body: dashboardScreens[currentIndex],
