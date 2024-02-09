@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/main.dart';
+import 'package:flutter_batch_2024_jan/screens/api/movies_list_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/api/todo_api_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/change_langauge_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/dashhome_screen.dart';
@@ -9,8 +11,10 @@ import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/layout_builder_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/pageview_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/profile_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/razorpay_subscription.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/tabview_layout.dart';
+import 'package:flutter_batch_2024_jan/utilities/shared_preferance_utils.dart';
 import 'package:flutter_batch_2024_jan/widgets/drawer_item_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -25,7 +29,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   List dashboardScreens = [
     // DashHomeScreen(),
@@ -36,10 +40,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  String loggedInMobileNumber = "";
+
   @override
   void initState() {
+    bool? data = sharedPreferences.getBool("isUserLogin");
+    loggedInMobileNumber = sharedPreferences.getString("mobile") ?? "";
+    print("data ${data}");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.setLocale(Locale("hi"));
+      context.setLocale(Locale(SharedPreferanceUtils().getLanguage()));
     });
     super.initState();
   }
@@ -57,7 +66,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           //     },
           //     child: Icon(Icons.home)),
           backgroundColor: Colors.teal,
-          title: const Text("Dashboard Screen"),
+          // title: const Text("Dashboard Screen"),
+          title: Text("Hello, $loggedInMobileNumber"),
           actions: [
             InkWell(
               onTap: () {
@@ -125,7 +135,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 },
                                 child: Text("No")),
                             TextButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  // await sharedPreferences.setString(
+                                  //     "mobile", "");
+                                  // await sharedPreferences.setBool(
+                                  //     "isUserLogin", false);
+                                  await sharedPreferences.clear();
                                   Navigator.pop(context);
                                   Navigator.pushAndRemoveUntil(
                                       context,
@@ -178,6 +193,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     MaterialPageRoute(builder: (ctx) => DashHomeScreen()));
               },
             ),
+
+            DrawerItemWidget(
+              title: "Subscription",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => RazorpaySubscription()));
+              },
+            ),
             DrawerItemWidget(
               title: "Tab Layout",
               onTap: () {
@@ -192,6 +218,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (ctx) => TodoAPIScreen()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "Movies APIS",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => MoviesListScreen()));
               },
             ),
             DrawerItemWidget(

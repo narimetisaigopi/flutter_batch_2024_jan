@@ -118,7 +118,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               TextFormField(
                 controller: nameTextEditingController,
                 maxLength: 100,
-                keyboardType: TextInputType.text,
+                onTapOutside: (event) {
+                  // for closing keyword when touched outside
+                  FocusScope.of(context).unfocus();
+                },
+                keyboardType: TextInputType.number,
                 onChanged: (value) {
                   print("value : $value");
                   formKey.currentState!.validate();
@@ -129,7 +133,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   }
                   return null;
                 },
-                textInputAction: TextInputAction.next,
+                // textInputAction: TextInputAction.next,
                 onEditingComplete: () {
                   print("Moving to next line");
                   FocusScope.of(context).nextFocus();

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/main.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/registration_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
+  bool isLoggedIn = false;
 
   TextEditingController phoneTextEditingController = TextEditingController();
 
@@ -111,17 +113,22 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   print("Clicked on Registration");
-                  // Navigator.of(context).pushAndRemoveUntil(
-                  //     MaterialPageRoute(
-                  //         builder: (ctx) => DashboardScreen(
-                  //               email: phoneTextEditingController.text,
-                  //             )),
-                  //     (route) => false);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      DashboardScreen.routeName, (route) => false,
-                      arguments: [phoneTextEditingController.text, "Sai"]);
+                  // api calls
+                  // await sharedPreferences.setString("email", "asa");
+                  await sharedPreferences.setString(
+                      "mobile", phoneTextEditingController.text);
+                  await sharedPreferences.setBool("isUserLogin", true);
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (ctx) => DashboardScreen(
+                                email: phoneTextEditingController.text,
+                              )),
+                      (route) => false);
+                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                  //     DashboardScreen.routeName, (route) => false,
+                  //     arguments: [phoneTextEditingController.text, "Sai"]);
                 },
                 style: ButtonStyle(
                     // padding: MaterialStateProperty.all(EdgeInsets.zero),

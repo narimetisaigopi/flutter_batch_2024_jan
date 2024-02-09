@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/main.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
+import 'package:flutter_batch_2024_jan/utilities/shared_preferance_utils.dart';
 
 class ChangeLanguageScreen extends StatelessWidget {
-  const ChangeLanguageScreen({super.key});
+  SharedPreferanceUtils sharedPreferanceUtils = SharedPreferanceUtils();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class ChangeLanguageScreen extends StatelessWidget {
           TextButton(
               onPressed: () {
                 context.setLocale(Locale("en"));
+                sharedPreferanceUtils.setLanguage("en");
                 print(context.locale.toString());
                 // Navigator.pushAndRemoveUntil(
                 //     context,
@@ -28,6 +31,7 @@ class ChangeLanguageScreen extends StatelessWidget {
           TextButton(
             onPressed: () {
               context.setLocale(Locale("te"));
+              sharedPreferanceUtils.setLanguage("te");
               print(context.locale.toString());
               // Navigator.pushAndRemoveUntil(
               //     context,
@@ -39,6 +43,7 @@ class ChangeLanguageScreen extends StatelessWidget {
           TextButton(
               onPressed: () {
                 context.setLocale(Locale("hi"));
+                sharedPreferanceUtils.setLanguage("hi");
                 print(context.locale.toString());
                 // Navigator.pushAndRemoveUntil(
                 //     context,
