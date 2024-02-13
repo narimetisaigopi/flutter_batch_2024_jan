@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_batch_2024_jan/providers/shopping_provider.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences sharedPreferences;
@@ -27,25 +29,30 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // it is parent for whole app
-      title: 'App Name',
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      theme: ThemeData(
-        textTheme: GoogleFonts.aDLaMDisplayTextTheme(),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true,
-        // fontFamily: 'SingleDay'
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ShoppingProvider()),
+      ],
+      child: MaterialApp(
+        // it is parent for whole app
+        title: 'App Name',
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        theme: ThemeData(
+          textTheme: GoogleFonts.aDLaMDisplayTextTheme(),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+          useMaterial3: true,
+          // fontFamily: 'SingleDay'
+        ),
+        // initialRoute: '/',
+        // // routes: {
+        // //   '/': (context) => RegistrationScreen(),
+        // //   '/loginScreen': (context) => LoginScreen()
+        // // },
+        // onGenerateRoute: onGenerateRoute
+        home: SplashScreen(),
       ),
-      // initialRoute: '/',
-      // // routes: {
-      // //   '/': (context) => RegistrationScreen(),
-      // //   '/loginScreen': (context) => LoginScreen()
-      // // },
-      // onGenerateRoute: onGenerateRoute
-      home: SplashScreen(),
     );
   }
 }

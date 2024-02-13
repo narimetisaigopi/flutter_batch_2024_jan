@@ -11,6 +11,7 @@ import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/layout_builder_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/pageview_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/profile_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/provider_screens/shopping_items.dart';
 import 'package:flutter_batch_2024_jan/screens/razorpay_subscription.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/tabview_layout.dart';
@@ -218,6 +219,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (ctx) => TodoAPIScreen()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "Provider",
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => ShoppingItems()));
               },
             ),
             DrawerItemWidget(
