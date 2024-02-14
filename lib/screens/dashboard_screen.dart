@@ -7,16 +7,18 @@ import 'package:flutter_batch_2024_jan/screens/change_langauge_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/dashhome_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/subscription_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/dashboard/videos_screen.dart';
+import 'package:flutter_batch_2024_jan/screens/getx/getx_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/home_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/layout_builder_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/pageview_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/profile_screen.dart';
-import 'package:flutter_batch_2024_jan/screens/provider_screens/shopping_items.dart';
+import 'package:flutter_batch_2024_jan/screens/provider_screens/shopping_items_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/razorpay_subscription.dart';
 import 'package:flutter_batch_2024_jan/screens/splash_screen.dart';
 import 'package:flutter_batch_2024_jan/screens/tabview_layout.dart';
 import 'package:flutter_batch_2024_jan/utilities/shared_preferance_utils.dart';
 import 'package:flutter_batch_2024_jan/widgets/drawer_item_widget.dart';
+import 'package:get/route_manager.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const String routeName = "/DashboardScreen";
@@ -194,7 +196,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     MaterialPageRoute(builder: (ctx) => DashHomeScreen()));
               },
             ),
-
             DrawerItemWidget(
               title: "Subscription",
               onTap: () {
@@ -226,7 +227,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => ShoppingItems()));
+                    MaterialPageRoute(builder: (ctx) => ShoppingItemsScreen()));
               },
             ),
             DrawerItemWidget(
@@ -243,6 +244,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (ctx) => PageViewScreen()));
+              },
+            ),
+            DrawerItemWidget(
+              title: "Getx",
+              onTap: () {
+                // Navigator.pop(context);
+                Get.back();
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (ctx) => ShoppingItemsScreen()));
+                Get.to(const GetxScreen());
               },
             ),
             DrawerItemWidget(

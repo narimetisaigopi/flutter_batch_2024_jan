@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_batch_2024_jan/models/shopping_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class ShoppingProvider extends ChangeNotifier {
@@ -9,6 +9,8 @@ class ShoppingProvider extends ChangeNotifier {
   bool isLoading = false;
 
   List<ShoppingModel> shoppingModelList = [];
+
+  List<ShoppingModel> cartItems = [];
 
   increaseCount() {
     count++;
@@ -19,6 +21,7 @@ class ShoppingProvider extends ChangeNotifier {
   getShoppingItems() async {
     try {
       isLoading = true;
+      await Future.delayed(Duration(seconds: 1));
       notifyListeners();
       http.Response response =
           await http.get(Uri.parse("https://fakestoreapi.com/products"));
@@ -36,5 +39,24 @@ class ShoppingProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  addToCart(ShoppingModel shoppingModel) {
+    cartItems.add(shoppingModel);
+    Fluttertoast.showToast(msg: "Added to cart");
+    notifyListeners();
+  }
+
+  bool isProductAdded(ShoppingModel shoppingModel) {
+    return cartItems
+        .where((element) => element.id == shoppingModel.id)
+        .toList()
+        .isEmpty;
+  }
+
+  removeFromCart(ShoppingModel shoppingModel) {
+    cartItems.removeWhere((element) => element.id == shoppingModel.id);
+    Fluttertoast.showToast(msg: "removed from cart");
+    notifyListeners();
   }
 }
